@@ -40,17 +40,61 @@ public class BlackBoxTesting {
     }
 
     @Test
+    public void testFindPair_InvalidAnimals() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        animals.add(10);
+        animals.add(11);
+        animals.add(12);
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 0));
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 2));
+    }
+
+    @Test
     public void testFindPair_OutOfBounds() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 0));
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 1));
+    }
+
+    @Test
+    public void testFindPair_ArrayLengthOne() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        animals.add(1);
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 0));
+    }
+
+    @Test
+    public void testFindPair_ArrayLengthTwo() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        animals.add(1);
+        animals.add(1);
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 0));
+    }
+
+    @Test
+    public void testFindPair_NoPairs() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        animals.add(1);
+        animals.add(4);
+        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 0));
+    }
+
+    @Test
+    public void testFindPair_OnePair() {
         ArrayList<Integer> animals = new ArrayList<>();
         animals.add(1);
         animals.add(2);
-        animals.add(3);
-        animals.add(4);
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
-            BeFriends.FindPair(animals, -1); // index out of bounds
-        });
+        Assertions.assertNotEquals(-1, BeFriends.FindPair(animals, 0));
+    }
 
-        Assertions.assertEquals(-1, BeFriends.FindPair(animals, 3));
+    @Test
+    public void testFindPair_TwoPairs() {
+        ArrayList<Integer> animals = new ArrayList<>();
+        animals.add(1);
+        animals.add(2);
+        animals.add(1);
+        Assertions.assertNotEquals(-1, BeFriends.FindPair(animals, 0));
+        Assertions.assertNotEquals(-1, BeFriends.FindPair(animals, 1));
     }
 
 }
